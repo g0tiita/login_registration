@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{%block title%}REGISTRO USUARIO{%endblock title%}
+
+{%block content%} 
+
+<h1>REGISTRO desde base</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="firstname" class="form-label">Name</label>
+        <input type="text" class="form-control" id="firstname" name="firstname">
+    </div>
+    <div class="mb-3">
+        <label for="lastname" class="form-label">LastName</label>
+        <input type="text" class="form-control" id="lastname" name="lastname">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" class="form-control" id="email" name="email">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <div class="mb-3">
+        <label for="password_confirm" class="form-label">Re-Password</label>
+        <input type="password" class="form-control" id="password_confirm" name="password_confirm">
+    </div>
+    <button type="submit" class="btn btn-primary">REGISTER</button>
+</form>
+{%endblock content%}
+
+{% block libreria%}
+
+    {% if messages %}
+        {% for message in messages %}
+            toastr.error("{{ message }}")
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
