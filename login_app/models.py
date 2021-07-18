@@ -4,8 +4,8 @@ import re
 # Manejador del usuario
 class UserManager(models.Manager):
     def basic_validator(self, postData):
-        EMAIL_REGEX = re.compile(r'[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+')
-        ONLYLETTERS_REGEX = re.compile(r'^[A-Z][a-z]+$')
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        ONLYLETTERS_REGEX = re.compile(r'^[a-zA-Z. ]+$')
 
         errors = {}
         # agregue claves y valores al diccionario de errores para cada campo no válido
@@ -13,7 +13,7 @@ class UserManager(models.Manager):
             errors['firstname'] = "Firstname should be at least 2 characters"
         
         if len(postData['lastname']) < 2:
-            errors['lastname'] = "Last description should be at least 2 characters"
+            errors['lastname'] = "Last name should be at least 2 characters"
         
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address!"
@@ -31,19 +31,18 @@ class UserManager(models.Manager):
 
 # Modelo de Usuario
 class User(models.Model):
-    firstName = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
     email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=70)
-    birthday = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
     def __str__(self):
-        return f"{self.firstName} {self.lastName}"
+        return f"{self.firstname} {self.lastname}"
     
     def __repr__(self):
-        return f"{self.firstName} {self.lastName}"
+        return f"{self.firstname} {self.lastname}"
 
     

@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{%block title%}Login & Registration{%endblock title%}
+
+{%block content%} 
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Success! Welcome, {{request.session.usuario.name}}</h2>
+            <a href="/logout">Salir</a>
+        </div>
+    </div>
+</div>
+
+{%endblock content%}

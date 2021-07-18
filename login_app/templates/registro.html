@@ -31,12 +31,4 @@
 </form>
 {%endblock content%}
 
-{% block libreria%}
 
-    {% if messages %}
-        {% for message in messages %}
-            toastr.error("{{ message }}")
-        {% endfor %}
-    {% endif %}
-
-{% endblock %}
